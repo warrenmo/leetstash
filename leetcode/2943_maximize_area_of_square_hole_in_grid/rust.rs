@@ -11,19 +11,15 @@ impl Solution {
     }
 
     fn biggest_gap(bars: Vec<i32>) -> i32 {
-        let mut start = 1;
-        let mut expected_next = 2;
-        let mut gap = 1;
-        let mut i = 0;
+        let mut curr: i32 = 1;
+        let mut gap: i32 = 2;
 
-        while i < bars.len() {
-            if (bars[i] == expected_next) {
-                expected_next += 1;
-                gap = std::cmp::max(gap, 1 + bars[i] - start);
-                i += 1;
+        for i in 1..bars.len() {
+            if (bars[i] == bars[i - 1] + 1) {
+                gap = std::cmp::max(gap, 2 + curr);
+                curr += 1;
             } else {
-                start = bars[i] - 1;
-                expected_next = start + 1;
+                curr = 1;
             }
         }
 
